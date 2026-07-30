@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookie Notice — Employment Law Simplified</title>
+<meta name="description" content="How Employment Law Simplified uses cookies and similar technologies.">
+<link rel="stylesheet" href="/style.css">
+<link rel="canonical" href="https://employmentlawsimplified.co.uk/cookie-notice.html">
+<meta property="og:title" content="Cookie Notice — Employment Law Simplified">
+<meta property="og:description" content="How Employment Law Simplified uses cookies and similar technologies.">
+<meta property="og:url" content="https://employmentlawsimplified.co.uk/cookie-notice.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Employment Law Simplified">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cookie Notice — Employment Law Simplified">
+<meta name="twitter:description" content="How Employment Law Simplified uses cookies and similar technologies.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Employment Law Simplified",
+  "url": "https://employmentlawsimplified.co.uk",
+  "description": "Free, plain-English strategic guidance for UK employees navigating workplace disputes."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Employment Law Simplified",
+  "url": "https://employmentlawsimplified.co.uk"
+}
+</script>
+</head>
+<body>
+<nav class="site-nav"><div class="nav-inner"><a href="/" class="nav-brand">Employment Law <span>Simplified</span></a><ul class="nav-links" id="navLinks"><li><a href="/">Home</a></li><li><a href="/start-here.html">Start Here</a></li><li><a href="/articles/tribunal-guide.html">Tribunal Guide</a></li><li><a href="/articles/">Articles</a></li><li><a href="/resources.html">Resources</a></li><li><a href="/about.html">About</a></li></ul><button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+<section class="section" style="padding-top:3.5rem;"><div class="prose"><div class="section-label">Legal</div><h1>Cookie Notice</h1><div class="article-meta">Last updated: July 2026</div>
+<h2>What This Notice Covers</h2>
+<p>This notice explains how Employment Law Simplified (employmentlawsimplified.co.uk) uses cookies and similar technologies, and the choices you have about them.</p>
+<h2>Essential Cookies</h2>
+<p>We use a small number of strictly necessary cookies required for the site to function correctly (for example, to remember your cookie consent choice). These do not require consent under UK law and cannot be switched off.</p>
+<h2>Analytics</h2>
+<p>We use Plausible Analytics to understand how visitors use this site. Plausible is a privacy-focused analytics tool that does not use cookies and does not collect or store any personally identifiable information. It is loaded only after you accept analytics via the consent banner, or not at all if you decline.</p>
+<h2>Affiliate Link Cookies</h2>
+<p>When you click an affiliate link on this site, the destination website may place its own cookies on your device to track the referral, in accordance with that third party's own cookie and privacy policies. We do not control and are not responsible for these cookies. See our <a href="/affiliate-disclosure.html">Affiliate Disclosure</a> for more detail.</p>
+<h2>Managing Your Preferences</h2>
+<p>You can change your analytics consent choice at any time by clearing your browser's local storage for this site, which will cause the consent banner to reappear on your next visit. You can also control cookies generally through your browser settings.</p>
+<h2>Contact</h2>
+<p>If you have questions about this cookie notice, please contact us through our <a href="/contact.html">contact page</a>.</p>
+</div></section>
+<footer class="site-footer"><div class="footer-inner"><div class="footer-bottom"><div class="footer-copy">&copy; 2026 Employment Law Simplified. All rights reserved.</div><div class="footer-legal"><a href="/disclaimer.html">Disclaimer</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/cookie-notice.html">Cookies</a> &middot; <a href="/affiliate-disclosure.html">Affiliate Disclosure</a> &middot; <a href="/terms.html">Terms</a></div></div></div></footer>
+<!-- Cookie consent banner -->
+<div id="cookieConsent" class="cookie-consent" role="dialog" aria-label="Cookie consent" hidden>
+  <div class="cookie-consent-inner">
+    <p>We use privacy-friendly analytics (Plausible, which does not use cookies) to understand how visitors use this site. Affiliate links may set cookies on partner sites when clicked. See our <a href="/cookie-notice.html">Cookie Notice</a>.</p>
+    <div class="cookie-consent-actions">
+      <button type="button" id="cookieDecline" class="cookie-btn cookie-btn-secondary">Decline analytics</button>
+      <button type="button" id="cookieAccept" class="cookie-btn cookie-btn-primary">Accept</button>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  function loadAnalytics() {
+    if (document.getElementById('plausible-script')) return;
+    var s = document.createElement('script');
+    s.id = 'plausible-script';
+    s.defer = true;
+    s.setAttribute('data-domain', 'employmentlawsimplified.co.uk');
+    s.src = 'https://plausible.io/js/script.js';
+    document.head.appendChild(s);
+  }
+  var choice = localStorage.getItem('els-cookie-consent');
+  if (choice === 'accepted') {
+    loadAnalytics();
+  } else if (choice !== 'declined') {
+    var banner = document.getElementById('cookieConsent');
+    if (banner) banner.hidden = false;
+  }
+  var acceptBtn = document.getElementById('cookieAccept');
+  var declineBtn = document.getElementById('cookieDecline');
+  if (acceptBtn) acceptBtn.addEventListener('click', function () {
+    localStorage.setItem('els-cookie-consent', 'accepted');
+    document.getElementById('cookieConsent').hidden = true;
+    loadAnalytics();
+  });
+  if (declineBtn) declineBtn.addEventListener('click', function () {
+    localStorage.setItem('els-cookie-consent', 'declined');
+    document.getElementById('cookieConsent').hidden = true;
+  });
+})();
+</script>
+</body></html>
