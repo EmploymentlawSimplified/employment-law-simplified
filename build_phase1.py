@@ -33,6 +33,8 @@ PAGES = [
      "Employment Law Simplified's affiliate relationships and how they affect our recommendations.", "website"),
     ("terms.html", "/terms.html", "Terms of Use — Employment Law Simplified",
      "Terms of use for Employment Law Simplified (employmentlawsimplified.co.uk).", "website"),
+    ("thank-you.html", "/thank-you.html", "Thank You — Employment Law Simplified",
+     "Order confirmation for Employment Law Simplified template purchases.", "website"),
     ("articles/index.html", "/articles/", "Articles — Employment Law Simplified",
      "Practical guides on employment tribunals, discrimination, grievances, and workplace rights for UK employees.", "website"),
     ("articles/tribunal-guide.html", "/articles/tribunal-guide.html", "The Complete Employment Tribunal Guide — Employment Law Simplified",

@@ -691,3 +691,72 @@ img {
   color: var(--white);
   border-color: rgba(255,255,255,0.4);
 }
+
+/* ---- PRODUCTS / TEMPLATES & TOOLS ---- */
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-card-body {
+  flex: 1;
+}
+
+.product-price {
+  display: inline-block;
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  color: var(--navy);
+  font-size: 1.15rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.product-price-note {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  font-weight: 400;
+  margin-left: 0.35rem;
+}
+
+.buy-btn {
+  display: inline-block;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0.65rem 1.25rem;
+  border-radius: 6px;
+  background: var(--teal);
+  color: var(--white) !important;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.buy-btn:hover {
+  background: var(--teal-light);
+  color: var(--white);
+}
+
+.buy-btn[aria-disabled="true"] {
+  background: var(--border);
+  color: var(--text-light) !important;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.coming-soon-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  background: var(--warm-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+}
