@@ -444,6 +444,15 @@ img {
   color: var(--text-primary);
 }
 
+.prose ul.mistake-list, .prose ul.doc-list {
+  list-style: none;
+  margin-left: 0;
+}
+
+.prose ul.mistake-list li, .prose ul.doc-list li {
+  padding-left: 0.25rem;
+}
+
 .prose blockquote {
   border-left: 3px solid var(--gold);
   padding: 1rem 1.5rem;
@@ -759,4 +768,149 @@ img {
   border: 1px solid var(--border);
   border-radius: 999px;
   padding: 0.25rem 0.75rem;
+}
+
+/* ---- STAGE JOURNEY LIST ---- */
+
+.stage-list {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.stage-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+}
+
+.stage-row:last-child { border-bottom: none; }
+
+a.stage-row.stage-available:hover { background: var(--warm-card); }
+
+.stage-num {
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--border);
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-family: Georgia, serif;
+}
+
+.stage-row.stage-available .stage-num {
+  background: var(--teal);
+  color: var(--white);
+}
+
+.stage-body { flex: 1; }
+
+.stage-body h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+  color: var(--text-light);
+}
+
+.stage-row.stage-available .stage-body h3 { color: var(--navy); }
+
+.stage-body p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+/* ---- DOCUMENTS / PRICE LIST TABLE ---- */
+
+.docs-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 1.5rem 0 2.5rem;
+}
+
+.docs-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  font-size: 0.95rem;
+}
+
+.docs-table caption {
+  caption-side: top;
+  text-align: left;
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  color: var(--navy);
+  font-size: 1.15rem;
+  padding: 0.75rem 1rem;
+  background: var(--warm-card);
+}
+
+.docs-table thead th {
+  background: var(--navy);
+  color: var(--white);
+  text-align: left;
+  font-weight: 600;
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.docs-table tbody td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text-primary);
+}
+
+.docs-table tbody tr:nth-child(even) {
+  background: var(--warm-bg);
+}
+
+.docs-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.docs-table .doc-name {
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.docs-table .doc-price {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  color: var(--navy);
+  white-space: nowrap;
+}
+
+.docs-table .doc-free {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  color: var(--teal);
+  white-space: nowrap;
+}
+
+.docs-table-note {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  display: block;
+  margin-top: 0.2rem;
+}
+
+@media (max-width: 640px) {
+  .docs-table { font-size: 0.85rem; }
+  .docs-table thead th, .docs-table tbody td { padding: 0.6rem 0.6rem; }
 }

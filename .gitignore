@@ -3,3 +3,11 @@ node_modules/
 .DS_Store
 *.zip
 site_root_tmp/
+
+# Large binary product assets — not part of the deployed site, handled separately
+product-images/
+brand-assets/
+template-drafts/
+products-final/
+kdp-ebook/
+video/
