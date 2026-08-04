@@ -1,4 +1,4 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8">
@@ -240,8 +240,8 @@ DOCTYPE html>
 					</div>
 					<p class="result-note" id="r-capnote"></p>
 					<div class="email-capture">
-						<h4 class="email-title">Email me these results</h4>
-						<p class="email-sub">Get a copy of your estimate to keep, plus the next steps for building your case.</p>
+						<h4 class="email-title" id="email-title">Get the next steps for your claim</h4>
+						<p class="email-sub" id="email-sub">Pop in your email below. Tick the box and I'll send you practical, plain-English tips on building and winning your case.</p>
 						<div class="calc-field">
 							<label for="email">Your email address</label>
 							<input type="email" id="email" placeholder="you@example.com" autocomplete="email">
@@ -251,7 +251,7 @@ DOCTYPE html>
 							<label for="optin">Also send me occasional practical tips on winning an employment case. No spam, unsubscribe anytime. (optional)</label>
 						</div>
 						<div class="calc-actions">
-							<button class="calc-btn calc-btn-primary" onclick="emailResults(this)">Send my results</button>
+							<button class="calc-btn calc-btn-primary" id="email-btn" onclick="emailResults(this)">Send</button>
 						</div>
 						<p class="email-status" id="email-status"></p>
 						<p class="email-privacy">We use your email only to send what you asked for. See our <a href="/privacy.html">privacy notice</a>.</p>
@@ -337,14 +337,16 @@ DOCTYPE html>
 	</div>
 </footer>
 ​
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-	// ---- EmailJS config: replace these four values with your own from emailjs.com ----
-	const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
-	const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
-	const EMAILJS_USER_TEMPLATE_ID = 'YOUR_USER_TEMPLATE_ID';
-	const EMAILJS_OWNER_TEMPLATE_ID = 'YOUR_OWNER_TEMPLATE_ID';
-	if (window.emailjs) { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); }
+	// ---- Web3Forms config ----
+	// Your Web3Forms access key. Every submission is emailed to the address you registered with Web3Forms.
+	const WEB3FORMS_ACCESS_KEY = '81131bfc-0312-47f5-a8f2-97b1dc8ea8a0';
+	// Web3Forms FREE sends each submission to YOUR inbox (the person's email, their figures and consent) —
+	// great for capturing leads and building your list. It does NOT email the user a copy of their results
+	// unless you turn on the Autoresponder, which is a Web3Forms PRO (paid) feature.
+	// AFTER you enable the Autoresponder in the Web3Forms dashboard, set this to true so the page
+	// promises the user their emailed copy. Leave it false while you are on the free plan.
+	const USER_GETS_EMAIL = false;
 ​
 	const WEEK_CAP = 719;          // Cap on a week's pay (from 6 April 2025)
 	const COMP_CAP = 118223;       // Compensatory award cap (from 6 April 2025)
@@ -429,35 +431,55 @@ DOCTYPE html>
 			setStatus('err', 'Please enter a valid email address.');
 			return;
 		}
-		if (!window.emailjs) {
-			setStatus('err', 'Email service not loaded. Please refresh and try again.');
-			return;
-		}
-		const params = {
-			to_email: email,
-			optin: optin ? 'YES - add to mailing list' : 'not opted in',
-			basic: document.getElementById('r-basic').textContent,
-			comp: document.getElementById('r-comp').textContent,
-			stat: document.getElementById('r-stat').textContent,
-			vento: document.getElementById('r-vento').textContent,
-			total: document.getElementById('r-total').textContent,
-			date: new Date().toLocaleDateString('en-GB')
+		const payload = {
+			access_key: WEB3FORMS_ACCESS_KEY,
+			subject: 'New calculator lead \u2014 Employment Law Simplified',
+			from_name: 'ELS Compensation Calculator',
+			email: email,
+			'Joined mailing list': optin ? 'YES \u2014 add to list' : 'No \u2014 results only',
+			'Basic award': document.getElementById('r-basic').textContent,
+			'Compensatory award': document.getElementById('r-comp').textContent,
+			'Loss of statutory rights': document.getElementById('r-stat').textContent,
+			'Injury to feelings': document.getElementById('r-vento').textContent,
+			'Estimated total': document.getElementById('r-total').textContent,
+			'Date': new Date().toLocaleDateString('en-GB'),
+			botcheck: ''
 		};
-		setStatus('', 'Sending...');
+		setStatus('', 'Sending\u2026');
 		if (btn) btn.disabled = true;
-		Promise.all([
-			emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_USER_TEMPLATE_ID, params),
-			emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_OWNER_TEMPLATE_ID, params)
-		]).then(function () {
-			setStatus('ok', 'Sent! Check your inbox for your results.');
+		fetch('https://api.web3forms.com/submit', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+			body: JSON.stringify(payload)
+		}).then(function (r) { return r.json(); }).then(function (data) {
+			if (data.success) {
+				if (USER_GETS_EMAIL) {
+					setStatus('ok', 'Sent! Check your inbox for a copy of your results.');
+				} else if (optin) {
+					setStatus('ok', 'Thanks \u2014 you\u2019re on the list. Your results are shown above; feel free to screenshot them.');
+				} else {
+					setStatus('ok', 'Thanks \u2014 got it. Your results are shown above; feel free to screenshot them.');
+				}
+				document.getElementById('email').value = '';
+				document.getElementById('optin').checked = false;
+			} else {
+				setStatus('err', 'Sorry, something went wrong. Please try again in a moment.');
+			}
 			if (btn) btn.disabled = false;
 		}).catch(function (err) {
-			setStatus('err', 'Sorry, something went wrong. Please try again in a moment.');
+			setStatus('err', 'Sorry, something went wrong. Please check your connection and try again.');
 			if (btn) btn.disabled = false;
 			console.error(err);
 		});
 	}
+​
+	// If you upgrade to Web3Forms Pro and enable the Autoresponder, set USER_GETS_EMAIL = true above.
+	// That switches the on-page wording to promise the user their emailed copy.
+	if (USER_GETS_EMAIL) {
+		document.getElementById('email-title').textContent = 'Email me these results';
+		document.getElementById('email-sub').textContent = 'Get a copy of your estimate to keep, plus the next steps for building your case.';
+		document.getElementById('email-btn').textContent = 'Send my results';
+	}
 </script>
 </body>
 </html>
-​
