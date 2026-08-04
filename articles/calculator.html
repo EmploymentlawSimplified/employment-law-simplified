@@ -1,58 +1,97 @@
-I can definitely help with this. First, let me check your website build brief so my GitHub steps match how your site is actually set up.
+<aside>
+🪞
 
-Happy to help you get this calculator live. One thing to flag up front so you're not waiting on me for the wrong thing: **I don't have a direct GitHub connection in this chat**, so I can't push the code into your repo for you automatically. What I *can* do is give you exact, copy-paste steps to do it yourself (it's genuinely quick — this is a single self-contained HTML page), and prep the file so it drops straight into your site.
+Valla isn't pure self-help — it's a **hybrid**: free tools to build trust, paid support where it matters. That's not a flaw, it's the model working. Our job is to **take what fits our business, adapt what needs a human face, and leave the rest.**
 
-Here's the good news: looking at your build brief, your site already runs through **Claude Code + a git repo**, so you actually have two easy routes.
+</aside>
 
-## The two ways to install it
+## The filter: Take / Adapt / Leave
 
-**Option A — Hand it to Claude Code (easiest, fits your existing workflow)**
+| What Valla does | Verdict | What we do about it |
+| --- | --- | --- |
+| Dead-simple 3-step journey | **Take** | Rebuild homepage around one clear path |
+| Transparent, low-entry pricing | **Take** | Show every price on Gumroad, cheap entry product |
+| Emotional "we get where you are" framing | **Adapt — our edge** | Lead with lived story, not a platform's slogan |
+| FAQ that pre-empts every fear | **Take** | Turn their FAQ into our article + video backlog |
+| Named social proof (reviews, wins, press) | **Take** | Start banking testimonials + win screenshots now |
+| Free top-of-funnel tool | **Take** | Build one free tracker/checklist lead magnet |
+| Honest "when NOT to use us" positioning | **Take** | Openly point people to solicitors when right |
+| £149 SRA-supervised case assessment | **Leave** | We're not regulated — no case-merits opinions |
+| Building a software platform | **Leave** | Can't out-engineer a funded team — win on content |
+| VC-scale overhead (bench of lawyers) | **Leave** | Stay lean; that's how our free tier can be more generous |
 
-Since Claude Code already has access to your repo, you just tell it what to do. Paste it something like:
+## What we TAKE — and how
 
-> "Add a new page for the Employment Tribunal Compensation Calculator. Create `calculator.html` at the site root using the HTML I'll paste below. Make sure it uses the existing `style.css` and matches the site's CSS variables (--navy, --teal, --gold, etc.). Add a 'Calculator' link to the global nav and footer, and add appropriate `<title>`/meta/canonical tags. Small, reviewable commit — don't touch other pages."
-> 
+### 1. A clear 3-step journey
 
-Then paste the code from your Github page. Claude Code handles the commit for you.
+Valla: *Book a call → get a report → use tools.* Anyone gets it instantly.
 
-**Option B — Add it manually via the GitHub website**
+**Ours:** **Understand your rights → Raise it properly → Prepare your case.** Confused people don't buy — clarity converts.
 
-1. Go to your repo on github.com.
-1. Click **Add file → Create new file**.
-1. Name it `calculator.html` (or wherever your other pages live — e.g. `/articles/`).
-1. Paste in the calculator code.
-1. Scroll down, add a commit message like "Add tribunal compensation calculator", and click **Commit changes**.
-1. Your host (Netlify/Vercel/Pages) will redeploy automatically, and it'll be live at `yoursite.co.uk/calculator.html`.
+### 2. Transparent pricing
 
-## What I need from you to make this fit properly
+Show exactly what's free vs paid, no mystery, cheap entry point. Trust comes from *showing* the price. This also lets us sit clearly *below* their £149 for people who can't stretch that far.
 
-A few things, because this page assumes it's slotting into your existing site:
+### 3. Turn their FAQ into our content backlog
 
-1. **How do you normally edit/deploy the site?** Claude Code locally, the GitHub website directly, or something else? (This decides Option A vs B.)
-1. **Where should the calculator live** — its own page at `/calculator.html`, or under a section like `/resources/`? And do you want it linked in the top nav?
-1. **Your `style.css`** — this code relies on shared variables (`--navy`, `--teal`, `--gold`, `--warm-bg`, `--border`, etc.) and fonts (Lora + Inter) that must already be defined in your site's stylesheet. If they're not, the calculator will load but look unstyled. Do you know if those exist in your current CSS?
+Every Valla FAQ is a high-intent search query and a ready-made title:
 
-One more thing worth knowing: the code has two small formatting issues from being stored in Notion — the two Gumroad links got wrapped in markdown brackets (`url`) instead of being plain `href` values. I can give you a cleaned-up, ready-to-paste version with those fixed so the "Download Template" buttons work correctly.
+- Will my employer find out I'm getting help?
+- Is everything I share confidential?
+- What are the ACAS / tribunal deadlines?
+- Should I talk to my employer first?
+- What if I've already left my job?
+- Is this better than hiring a solicitor?
 
-Want me to prep that cleaned-up file, and which of the three questions above can you answer?
+Each one → an article + a bitesize video. This drops straight into the existing SEO content plan.
 
-Got it — straight to the point.
+### 4. Social proof, starting now
 
-**Create a new file in your repo called `calculator.html`** and paste the entire code block into it.
+One authentic *"I won my tribunal using Paul's templates"* is worth more than any slogan. Build the habit of collecting testimonials, comments, and win screenshots from day one so it compounds.
 
-Step by step in GitHub:
+### 5. One free lead-magnet tool
 
-1. Open your repo on github.com.
-1. Click **Add file → Create new file** (top right of the file list).
-1. In the filename box, type `calculator.html`
-1. Paste the whole code from your Github page into the big editing area.
-1. Scroll down, add a commit message like `Add compensation calculator`, and click **Commit changes**.
+Valla's free timeline/tracker captures people before they're ready to pay. **Ours:** a free **evidence & timeline tracker** or **"grievance readiness checklist"** — captures emails, builds trust, feeds the funnel.
 
-That's it. Once it deploys, it'll be live at `employmentlawsimplified.co.uk/calculator.html`.
+### 6. Honest positioning
 
-Two quick heads-ups so it actually works when it loads:
+*"If you can afford a solicitor to run it for you, do that. This is for the rest of us doing it ourselves."* Admitting our limits makes people trust our recommendations more.
 
-- The code links to `/style.css` and uses your site's colour variables (`--navy`, `--teal`, `--gold`, etc.). As long as that stylesheet already exists on your site, it'll look right. If it doesn't, the page will work but look plain.
-- The two **Gumroad download links** at the bottom are currently wrapped in brackets like `url`, which will break those buttons. In the code, find each `href="https://..."` and change it to just `href="https://..."` (plain URL, no brackets).
+## What we ADAPT — our unfair advantage
 
-Want me to give you a cleaned-up version of the code with those Gumroad links already fixed, so you can paste it as-is?
+<aside>
+💪
+
+Valla is a platform with anonymous "legal experts." **We are a named person who actually stood up at the Bristol Employment Tribunal and self-represented — and did it.** A funded platform structurally *cannot* copy that. Lead with the lived story everywhere: *"Suspended, pushed out, unsure where to turn? I've been exactly there."*
+
+</aside>
+
+## What we LEAVE — and why
+
+- **Case-merits assessments** ("will your claim succeed?") — that edges into regulated territory. We stay firmly on **information & strategy, not legal advice.** Keep the disclaimer prominent.
+- **A software platform** — we can't out-engineer a funded team. We win on **content depth, authenticity, and affordability**, not features.
+- **Heavy overhead** — staying lean is *why* our free tier can be more generous and our prices lower.
+
+## Our pricing ladder — mapped against Valla
+
+| Tier | Our offer | Price | Valla equivalent |
+| --- | --- | --- | --- |
+| Free | Guides, articles, videos, tracker/checklist | £0 | Free platform + timeline |
+| Low | Templates, toolkits, cue cards (Gumroad) | £5–£30 | Paid templates |
+| Mid | Self-representation course | £50–£150 | £149 assessment |
+| Premium | Limited 1:1 strategy calls | £100+/session | Coaching sessions |
+
+<aside>
+🎯
+
+The underserved slice: the person who **won't pay £149 but will happily pay £15** for the exact template they need tonight. That's our entry point into the same market Valla leaves behind.
+
+</aside>
+
+## Start this week
+
+- [ ]  Rewrite the homepage into a clear 3-step journey
+- [ ]  Turn Valla's FAQ into a content + video backlog (add to SEO plan)
+- [ ]  Create one free lead-magnet tool (evidence tracker or grievance checklist)
+- [ ]  Set up transparent, visible pricing on Gumroad with a cheap entry product
+- [ ]  Begin collecting testimonials / win screenshots
