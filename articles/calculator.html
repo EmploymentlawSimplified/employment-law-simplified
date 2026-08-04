@@ -1,0 +1,58 @@
+I can definitely help with this. First, let me check your website build brief so my GitHub steps match how your site is actually set up.
+
+Happy to help you get this calculator live. One thing to flag up front so you're not waiting on me for the wrong thing: **I don't have a direct GitHub connection in this chat**, so I can't push the code into your repo for you automatically. What I *can* do is give you exact, copy-paste steps to do it yourself (it's genuinely quick — this is a single self-contained HTML page), and prep the file so it drops straight into your site.
+
+Here's the good news: looking at your build brief, your site already runs through **Claude Code + a git repo**, so you actually have two easy routes.
+
+## The two ways to install it
+
+**Option A — Hand it to Claude Code (easiest, fits your existing workflow)**
+
+Since Claude Code already has access to your repo, you just tell it what to do. Paste it something like:
+
+> "Add a new page for the Employment Tribunal Compensation Calculator. Create `calculator.html` at the site root using the HTML I'll paste below. Make sure it uses the existing `style.css` and matches the site's CSS variables (--navy, --teal, --gold, etc.). Add a 'Calculator' link to the global nav and footer, and add appropriate `<title>`/meta/canonical tags. Small, reviewable commit — don't touch other pages."
+> 
+
+Then paste the code from your Github page. Claude Code handles the commit for you.
+
+**Option B — Add it manually via the GitHub website**
+
+1. Go to your repo on github.com.
+1. Click **Add file → Create new file**.
+1. Name it `calculator.html` (or wherever your other pages live — e.g. `/articles/`).
+1. Paste in the calculator code.
+1. Scroll down, add a commit message like "Add tribunal compensation calculator", and click **Commit changes**.
+1. Your host (Netlify/Vercel/Pages) will redeploy automatically, and it'll be live at `yoursite.co.uk/calculator.html`.
+
+## What I need from you to make this fit properly
+
+A few things, because this page assumes it's slotting into your existing site:
+
+1. **How do you normally edit/deploy the site?** Claude Code locally, the GitHub website directly, or something else? (This decides Option A vs B.)
+1. **Where should the calculator live** — its own page at `/calculator.html`, or under a section like `/resources/`? And do you want it linked in the top nav?
+1. **Your `style.css`** — this code relies on shared variables (`--navy`, `--teal`, `--gold`, `--warm-bg`, `--border`, etc.) and fonts (Lora + Inter) that must already be defined in your site's stylesheet. If they're not, the calculator will load but look unstyled. Do you know if those exist in your current CSS?
+
+One more thing worth knowing: the code has two small formatting issues from being stored in Notion — the two Gumroad links got wrapped in markdown brackets (`url`) instead of being plain `href` values. I can give you a cleaned-up, ready-to-paste version with those fixed so the "Download Template" buttons work correctly.
+
+Want me to prep that cleaned-up file, and which of the three questions above can you answer?
+
+Got it — straight to the point.
+
+**Create a new file in your repo called `calculator.html`** and paste the entire code block into it.
+
+Step by step in GitHub:
+
+1. Open your repo on github.com.
+1. Click **Add file → Create new file** (top right of the file list).
+1. In the filename box, type `calculator.html`
+1. Paste the whole code from your Github page into the big editing area.
+1. Scroll down, add a commit message like `Add compensation calculator`, and click **Commit changes**.
+
+That's it. Once it deploys, it'll be live at `employmentlawsimplified.co.uk/calculator.html`.
+
+Two quick heads-ups so it actually works when it loads:
+
+- The code links to `/style.css` and uses your site's colour variables (`--navy`, `--teal`, `--gold`, etc.). As long as that stylesheet already exists on your site, it'll look right. If it doesn't, the page will work but look plain.
+- The two **Gumroad download links** at the bottom are currently wrapped in brackets like `url`, which will break those buttons. In the code, find each `href="https://..."` and change it to just `href="https://..."` (plain URL, no brackets).
+
+Want me to give you a cleaned-up version of the code with those Gumroad links already fixed, so you can paste it as-is?
