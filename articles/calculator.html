@@ -119,6 +119,394 @@
 		color: var(--gold);
 	}
 	.result-note { font-size: 0.8rem; color: var(--text-light); margin-top: 0.85rem; }
+	/* ---- Email capture ---- */
+	.email-capture { margin-top: 1.75rem; padding-top: 1.75rem; border-top: 1px solid var(--border); }
+	.email-title { font-size: 1.15rem; margin-bottom: 0.4rem; color: var(--navy); }
+	.email-sub { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem; }
+	.email-status { margin-top: 0.9rem; font-size: 0.9rem; font-weight: 600; display: none; }
+	.email-status.ok { display: block; color: var(--teal); }
+	.email-status.err { display: block; color: #B3261E; }
+	.email-privacy { margin-top: 0.75rem; font-size: 0.75rem; color: var(--text-light); }
+</style>
+</head>
+<body>
+​
+<!-- ============ NAV ============ -->
+<!-- Adjust these href values to match your actual page filenames -->
+<nav class="site-nav">
+	<div class="nav-inner">
+		<a class="nav-brand" href="/">Employment Law <span>Simplified</span></a>
+		<ul class="nav-links">
+			<li><a href="/">Home</a></li>
+			<li><a href="/articles/">Guides</a></li>
+			<li><a href="/templates.html">Templates &amp; Tools</a></li>
+			<li><a href="/calculator.html" class="active">Calculator</a></li>
+			<li><a href="/about.html">About</a></li>
+			<li><a href="/contact.html">Contact</a></li>
+		</ul>
+		<button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+			<span></span><span></span><span></span>
+		</button>
+	</div>
+</nav>
+​
+<!-- ============ HERO ============ -->
+<section class="hero">
+	<div class="hero-inner">
+		<span class="hero-tag">Free Tool</span>
+		<h1>Employment Tribunal <em>Compensation Calculator</em></h1>
+		<p>Get a realistic estimate of what an unfair dismissal or discrimination claim could be worth — using the 2025/26 statutory figures. Built for people representing themselves.</p>
+	</div>
+</section>
+​
+<!-- ============ CALCULATOR ============ -->
+<section class="section">
+	<div class="section-inner">
+		<div class="prose">
+​
+			<div class="warning-box">
+				<div class="warning-box-title">Important — please read</div>
+				<p>This calculator gives a rough <strong>estimate for guidance only</strong>. It is information and strategy, <strong>not legal advice</strong>, and it does not predict what a tribunal will award in your case. Every case turns on its own facts. Awards can be reduced (for example for contributory conduct or failure to mitigate) or increased (for example ACAS uplifts). Use this to understand the moving parts — not as a guarantee.</p>
+			</div>
+​
+			<div class="calc">
+				<div class="calc-grid">
+					<div class="calc-field">
+						<label for="age">Your age at dismissal</label>
+						<input type="number" id="age" min="16" max="99" placeholder="e.g. 45">
+					</div>
+					<div class="calc-field">
+						<label for="years">Complete years of service</label>
+						<input type="number" id="years" min="0" max="50" placeholder="e.g. 6">
+						<span class="hint">Full years only. Capped at 20 for the basic award.</span>
+					</div>
+					<div class="calc-field">
+						<label for="gross">Gross weekly pay (£)</label>
+						<input type="number" id="gross" min="0" step="0.01" placeholder="e.g. 650">
+						<span class="hint">Before tax. Capped at £719/week for the basic award.</span>
+					</div>
+					<div class="calc-field">
+						<label for="net">Net weekly pay (£)</label>
+						<input type="number" id="net" min="0" step="0.01" placeholder="e.g. 500">
+						<span class="hint">Take-home pay. Used for lost earnings.</span>
+					</div>
+					<div class="calc-field">
+						<label for="weeks">Weeks of lost earnings claimed</label>
+						<input type="number" id="weeks" min="0" max="260" placeholder="e.g. 26">
+						<span class="hint">Time out of work so far, plus expected future loss.</span>
+					</div>
+					<div class="calc-field">
+						<label for="vento">Injury to feelings (discrimination only)</label>
+						<select id="vento">
+							<option value="0">None / not a discrimination claim</option>
+							<option value="6650">Lower Vento band (£1,200–£12,100)</option>
+							<option value="24250">Middle Vento band (£12,100–£36,400)</option>
+							<option value="48550">Upper Vento band (£36,400–£60,700)</option>
+						</select>
+						<span class="hint">Uses band mid-points as an illustration.</span>
+					</div>
+				</div>
+​
+				<div class="calc-check">
+					<input type="checkbox" id="statrights" checked>
+					<label for="statrights">Include loss of statutory rights (£500 — commonly awarded in unfair dismissal cases)</label>
+				</div>
+​
+				<div class="calc-actions">
+					<button class="calc-btn calc-btn-primary" onclick="calculate()">Calculate estimate</button>
+					<button class="calc-btn calc-btn-reset" onclick="resetCalc()">Reset</button>
+				</div>
+​
+				<div class="calc-results" id="results">
+					<div class="result-row">
+						<span class="label">Basic award</span>
+						<span class="value" id="r-basic">£0</span>
+					</div>
+					<div class="result-row">
+						<span class="label">Compensatory award (lost earnings)</span>
+						<span class="value" id="r-comp">£0</span>
+					</div>
+					<div class="result-row">
+						<span class="label">Loss of statutory rights</span>
+						<span class="value" id="r-stat">£0</span>
+					</div>
+					<div class="result-row">
+						<span class="label">Injury to feelings</span>
+						<span class="value" id="r-vento">£0</span>
+					</div>
+					<div class="result-total">
+						<span class="label">Estimated total</span>
+						<span class="value" id="r-total">£0</span>
+					</div>
+					<p class="result-note" id="r-capnote"></p>
+					<div class="email-capture">
+						<h4 class="email-title">Email me these results</h4>
+						<p class="email-sub">Get a copy of your estimate to keep, plus the next steps for building your case.</p>
+						<div class="calc-field">
+							<label for="email">Your email address</label>
+							<input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+						</div>
+						<div class="calc-check">
+							<input type="checkbox" id="optin">
+							<label for="optin">Also send me occasional practical tips on winning an employment case. No spam, unsubscribe anytime. (optional)</label>
+						</div>
+						<div class="calc-actions">
+							<button class="calc-btn calc-btn-primary" onclick="emailResults(this)">Send my results</button>
+						</div>
+						<p class="email-status" id="email-status"></p>
+						<p class="email-privacy">We use your email only to send what you asked for. See our <a href="/privacy.html">privacy notice</a>.</p>
+					</div>
+				</div>
+			</div>
+​
+			<h2>How the figures are worked out</h2>
+​
+			<h3>1. Basic award</h3>
+			<p>Calculated like statutory redundancy pay. For each complete year of service (up to 20 years) you get:</p>
+			<ul>
+				<li><strong>1.5 weeks' pay</strong> for each full year you were aged 41 or over</li>
+				<li><strong>1 week's pay</strong> for each full year you were aged 22 to 40</li>
+				<li><strong>0.5 week's pay</strong> for each full year you were under 22</li>
+			</ul>
+			<p>A week's pay is capped at <strong>£719</strong> (from 6 April 2025), so the maximum basic award is <strong>£21,570</strong>.</p>
+​
+			<h3>2. Compensatory award</h3>
+			<p>This covers your actual financial loss — mainly lost earnings from the date of dismissal until you find comparable work (past and estimated future). It is capped at the <strong>lower</strong> of 52 weeks' gross pay or <strong>£118,223</strong> (from 6 April 2025).</p>
+​
+			<div class="tip-box">
+				<div class="tip-box-title">Duty to mitigate</div>
+				<p>A tribunal expects you to take reasonable steps to find new work. Keep evidence of every job you apply for — it protects your compensatory award.</p>
+			</div>
+​
+			<h3>3. Injury to feelings (discrimination claims)</h3>
+			<p>If your claim involves discrimination, you may also recover compensation for injury to feelings, awarded in the three “Vento” bands (for claims presented on or after 6 April 2025):</p>
+			<ul>
+				<li><strong>Lower band — £1,200 to £12,100:</strong> one-off or isolated incidents</li>
+				<li><strong>Middle band — £12,100 to £36,400:</strong> serious cases that don't merit the top band</li>
+				<li><strong>Upper band — £36,400 to £60,700:</strong> the most serious, e.g. a lengthy campaign of harassment</li>
+			</ul>
+			<p>Discrimination compensation is <strong>not capped</strong>, which is why discrimination claims can be worth considerably more than “ordinary” unfair dismissal.</p>
+​
+			<div class="warning-box">
+				<div class="warning-box-title">This is a starting point, not a verdict</div>
+				<p>Real awards are affected by ACAS uplifts (up to 25%), contributory fault deductions, Polkey reductions, pension loss, grossing-up for tax, and more. Treat this number as a way to understand the shape of a claim — then get your facts and evidence in order.</p>
+			</div>
+​
+			<h2>Next steps</h2>
+			<p>Once you know roughly what your claim could be worth, the next job is building it properly — the grievance, the evidence, the ET1, the schedule of loss. Our step-by-step templates and guides walk you through each stage.</p>
+			<p>
+				<!-- Replace with your real Gumroad product links (plain href, no brackets) -->
+				<a class="buy-btn" href="https://employmentlawsimple.gumroad.com/l/ojdqk">Get the Schedule of Loss template</a>
+			</p>
+​
+		</div>
+	</div>
+</section>
+​
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+	<div class="footer-inner">
+		<div class="footer-grid">
+			<div>
+				<div class="footer-brand">Employment Law <span>Simplified</span></div>
+				<p class="footer-desc">Practical, plain-English guidance for UK employees facing workplace disputes — written from the employee's side by someone who has been there. Information and strategy, not legal advice.</p>
+			</div>
+			<div>
+				<div class="footer-heading">Explore</div>
+				<ul class="footer-links">
+					<li><a href="/articles/">Guides</a></li>
+					<li><a href="/templates.html">Templates &amp; Tools</a></li>
+					<li><a href="/calculator.html">Calculator</a></li>
+				</ul>
+			</div>
+			<div>
+				<div class="footer-heading">Project</div>
+				<ul class="footer-links">
+					<li><a href="/about.html">About</a></li>
+					<li><a href="/contact.html">Contact</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<span class="footer-copy">© 2026 Employment Law Simplified. Information, not legal advice.</span>
+			<span class="footer-legal">
+				<a href="/privacy.html">Privacy</a>
+				<a href="/terms.html">Terms</a>
+			</span>
+		</div>
+	</div>
+</footer>
+​
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+	// ---- EmailJS config: replace these four values with your own from emailjs.com ----
+	const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+	const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+	const EMAILJS_USER_TEMPLATE_ID = 'YOUR_USER_TEMPLATE_ID';
+	const EMAILJS_OWNER_TEMPLATE_ID = 'YOUR_OWNER_TEMPLATE_ID';
+	if (window.emailjs) { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); }
+​
+	const WEEK_CAP = 719;          // Cap on a week's pay (from 6 April 2025)
+	const COMP_CAP = 118223;       // Compensatory award cap (from 6 April 2025)
+	const STAT_RIGHTS = 500;       // Typical loss of statutory rights
+	const MAX_YEARS = 20;          // Basic award service cap
+​
+	function gbp(n) {
+		return '£' + Math.round(n).toLocaleString('en-GB');
+	}
+​
+	function calculate() {
+		const age = parseInt(document.getElementById('age').value, 10) || 0;
+		let years = parseInt(document.getElementById('years').value, 10) || 0;
+		const gross = parseFloat(document.getElementById('gross').value) || 0;
+		const net = parseFloat(document.getElementById('net').value) || 0;
+		const weeks = parseInt(document.getElementById('weeks').value, 10) || 0;
+		const vento = parseFloat(document.getElementById('vento').value) || 0;
+		const includeStat = document.getElementById('statrights').checked;
+​
+		// ---- Basic award ----
+		const cappedYears = Math.min(years, MAX_YEARS);
+		const weeklyForBasic = Math.min(gross, WEEK_CAP);
+		let basicWeeks = 0;
+		let ageThatYear = age;
+		for (let i = 0; i < cappedYears; i++) {
+			if (ageThatYear >= 41) basicWeeks += 1.5;
+			else if (ageThatYear >= 22) basicWeeks += 1.0;
+			else basicWeeks += 0.5;
+			ageThatYear--;
+		}
+		const basic = basicWeeks * weeklyForBasic;
+​
+		// ---- Compensatory award (capped) ----
+		let comp = net * weeks;
+		const compCap = Math.min(COMP_CAP, gross * 52);
+		let capped = false;
+		if (comp > compCap) { comp = compCap; capped = true; }
+​
+		const stat = includeStat ? STAT_RIGHTS : 0;
+		const total = basic + comp + stat + vento;
+​
+		document.getElementById('r-basic').textContent = gbp(basic);
+		document.getElementById('r-comp').textContent = gbp(comp);
+		document.getElementById('r-stat').textContent = gbp(stat);
+		document.getElementById('r-vento').textContent = gbp(vento);
+		document.getElementById('r-total').textContent = gbp(total);
+​
+		let note = 'Estimate based on 2025/26 statutory figures. ';
+		if (capped) note += 'Your compensatory award has been capped at ' + gbp(compCap) + '. ';
+		note += 'This is guidance only, not a prediction of your case.';
+		document.getElementById('r-capnote').textContent = note;
+​
+		document.getElementById('results').classList.add('show');
+		document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+	}
+​
+	function resetCalc() {
+		['age','years','gross','net','weeks'].forEach(id => document.getElementById(id).value = '');
+		document.getElementById('vento').value = '0';
+		document.getElementById('statrights').checked = true;
+		document.getElementById('email').value = '';
+		document.getElementById('optin').checked = false;
+		setStatus('', '');
+		document.getElementById('results').classList.remove('show');
+	}
+​
+	function setStatus(cls, msg) {
+		const s = document.getElementById('email-status');
+		s.className = 'email-status' + (cls ? ' ' + cls : '');
+		s.style.display = msg ? 'block' : 'none';
+		s.textContent = msg;
+	}
+​
+	function emailResults(btn) {
+		const email = document.getElementById('email').value.trim();
+		const optin = document.getElementById('optin').checked;
+		if (!document.getElementById('results').classList.contains('show')) {
+			setStatus('err', 'Please calculate your estimate first.');
+			return;
+		}
+		if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+			setStatus('err', 'Please enter a valid email address.');
+			return;
+		}
+		if (!window.emailjs) {
+			setStatus('err', 'Email service not loaded. Please refresh and try again.');
+			return;
+		}
+		const params = {
+			to_email: email,
+			optin: optin ? 'YES - add to mailing list' : 'not opted in',
+			basic: document.getElementById('r-basic').textContent,
+			comp: document.getElementById('r-comp').textContent,
+			stat: document.getElementById('r-stat').textContent,
+			vento: document.getElementById('r-vento').textContent,
+			total: document.getElementById('r-total').textContent,
+			date: new Date().toLocaleDateString('en-GB')
+		};
+		setStatus('', 'Sending...');
+		if (btn) btn.disabled = true;
+		Promise.all([
+			emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_USER_TEMPLATE_ID, params),
+			emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_OWNER_TEMPLATE_ID, params)
+		]).then(function () {
+			setStatus('ok', 'Sent! Check your inbox for your results.');
+			if (btn) btn.disabled = false;
+		}).catch(function (err) {
+			setStatus('err', 'Sorry, something went wrong. Please try again in a moment.');
+			if (btn) btn.disabled = false;
+			console.error(err);
+		});
+	}
+</script>
+</body>
+</html>		border-radius: var(--radius);
+		border: none;
+		cursor: pointer;
+		transition: background 0.2s, transform 0.2s;
+	}
+	.calc-btn-primary { background: var(--teal); color: var(--white); }
+	.calc-btn-primary:hover { background: var(--teal-light); transform: translateY(-1px); }
+	.calc-btn-reset { background: var(--warm-card); color: var(--text-secondary); }
+	.calc-btn-reset:hover { background: var(--border); }
+	/* Results */
+	.calc-results { margin-top: 2rem; display: none; }
+	.calc-results.show { display: block; }
+	.result-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 1rem;
+		padding: 0.9rem 0;
+		border-bottom: 1px solid var(--border);
+	}
+	.result-row .label { color: var(--text-secondary); font-size: 0.92rem; }
+	.result-row .value {
+		font-family: 'Lora', Georgia, serif;
+		font-weight: 600;
+		color: var(--navy);
+		font-size: 1.05rem;
+		white-space: nowrap;
+	}
+	.result-total {
+		margin-top: 1.25rem;
+		background: var(--navy);
+		color: var(--white);
+		border-radius: var(--radius);
+		padding: 1.5rem 1.75rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+	.result-total .label { font-size: 0.95rem; color: rgba(255,255,255,0.85); }
+	.result-total .value {
+		font-family: 'Lora', Georgia, serif;
+		font-weight: 700;
+		font-size: 1.6rem;
+		color: var(--gold);
+	}
+	.result-note { font-size: 0.8rem; color: var(--text-light); margin-top: 0.85rem; }
 </style>
 </head>
 <body>
